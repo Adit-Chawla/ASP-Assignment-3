@@ -1,0 +1,144 @@
+body {
+  font-family: 'Lato', sans-serif;
+  color: #333;
+  /* Darkened the text color for better contrast */
+  background-color: #f4f4f4;
+  /* Added a subtle gray background */
+}
+
+.first-link {
+  margin-left: 2em;
+  margin-right: 1em;
+}
+
+.nav-item {
+  font-weight: bold;
+}
+
+.nav-link {
+  font-size: 1.5em;
+  color: #007BFF !important;
+  /* Changed to Bootstrap's default blue for a consistent theme */
+  text-decoration: none;
+  /* Removed underline to clean up the design */
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+  /* Underline on hover for clarity */
+}
+
+.navbar-brand {
+  padding: 0;
+  margin-right: 10px;
+  font-size: 2em;
+  color: #007BFF;
+  /* Changed to Bootstrap's default blue for consistency */
+}
+
+.navbar-logo {
+  max-height: 100px;
+  width: auto;
+  margin-right: 10px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+p {
+  font-size: 1.3em;
+}
+
+h1 {
+  font-family: 'Oswald', sans-serif;
+  color: #007BFF;
+  /* Adjusted the color to match the theme */
+}
+
+h2,
+h6 {
+  font-family: 'Roboto Slab', serif;
+  color: #007BFF;
+  /* Adjusted the color to match the theme */
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+  background: #f8f9fa;
+  /* Adjusted for a cleaner design */
+}
+
+.table-striped tbody tr:nth-child(even) {
+  background-color: #ebebeb;
+}
+
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  font-size: 1.2em;
+  /* Slightly reduced for better readability */
+}
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  background-color: #fff;
+  padding: 0;
+  margin: 0;
+}
+
+.wrapper {
+  background: url(./bg3.png);
+  color: #262626;
+  padding: 280px 0;
+  perspective: 1000px;
+  perspective-origin: 50% 50%;
+  text-align: center;
+  margin-bottom: 0;
+  animation: animate 2s linear infinite;
+}
+
+@keyframes animate {
+  from {
+    background-position: 0 -120px;
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+
+.one {
+  text-align: center;
+}
+
+.one ul {
+  list-style-position: inside;
+  text-align: center;
+}

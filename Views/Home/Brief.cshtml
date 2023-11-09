@@ -1,0 +1,90 @@
+<div class="wrapper1">
+    <div class="text-center">
+        @{
+            ViewData["Title"] = "My Project Brief";
+        }
+
+        <h1>@ViewData["Title"]</h1><br><br>
+    </div>
+
+    <section class="one">
+        <h2>Company Info</h2>
+        <table class="table table-striped   ">
+            <tr>
+                <th>Company Name</th>
+                <td>TheSocialers Inc.</td>
+            </tr>
+
+            <tr>
+                <td>Company Description</td>
+                <td>We are a leading solutions provider for major social media platforms, enhancing user experience and
+                    driving user engagement.</td>
+            </tr>
+
+            <tr>
+                <td>Group Members & Roles</td>
+                <td>
+                    <ul>
+                        <li>Adit Chawla: Front-End Dev</li>
+                        <li>Malkit Kaur: Back-End Dev</li>
+                        <li>Sia Chachra: Full Stack Dev</li>
+                        <li>Vinnie Chachra: Full Stack Dev</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </section>
+    <br>
+    <section class="one">
+        <h2>Proposal</h2><br>
+
+        <h4>About Us</h4>
+        <p>This is the TheSocialers Inc.'s official website which'll be a hub for our innovative solutions tailored to
+            the
+            needs of major social media platforms. This will be a place social media companies can explore our offering,
+            request custom solutions, quotes and contact our customer service.</p><br>
+
+        <h4>Our Products</h4>
+        <ul>
+            <li>Engagement Boosters</li>
+            <li>Cyber Security</li>
+            <li>Custom Developments</li>
+        </ul><br>
+
+        <h4>Fulfilling Industry Needs</h4>
+        <p>With the exponential growth of social media, there's an increasing demand for tools that boost user
+            engagement,
+            ensure user safety, and enhance monetization opportunities. TheSocialers Inc. aims to address these needs
+            with
+            cutting-edge solutions.</p><br>
+
+        <h4>Roles For Users</h4>
+        <ul>
+            <li>Admin</li>
+            <li>Socail Media Company Rep</li>
+            <li>Developer</li>
+            <li>Guest</li>
+        </ul>
+    </section>
+</div>
+
+<script>
+    // JavaScript function to make the heading flash
+    function flashHeading() {
+        var flashingHeading = document.getElementById("flashingHeading");
+        var isHidden = false;
+
+        setInterval(function () {
+            if (isHidden) {
+                flashingHeading.style.visibility = "visible";
+                isHidden = false;
+            } else {
+                flashingHeading.style.visibility = "hidden";
+                isHidden = true;
+            }
+        }, 500); // Change the interval (in milliseconds) to control the flashing speed
+    }
+
+    // Call the flashHeading function when the page loads
+    window.onload = flashHeading;
+</script>

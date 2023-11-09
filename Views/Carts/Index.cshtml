@@ -1,0 +1,44 @@
+@model MyFirstApp.Models.Cart
+
+@{
+    ViewData["Title"] = "My Cart";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model?.CartItems != null)
+{
+    <table class = "table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach(var cartItem in Model.CartItems)
+            {
+                <tr>
+                    <td>@cartItem.Service.ServiceName</td>
+                    <td>@cartItem.Quantity</td>
+                    <td>@cartItem.Service.MSRP</td>
+                    <td>
+                        @((decimal)(cartItem.Quantity * cartItem.Service.MSRP))
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <th>Total</th>
+                <td colspan="3">
+                    @(Model.CartItems.Sum(cartItem => (decimal)(cartItem.Quantity * cartItem.Service.MSRP)))
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+}
