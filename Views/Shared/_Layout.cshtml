@@ -59,6 +59,41 @@
                         </li>
                     </ul>
 
+                    <div class = "navbar-nav">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a asp-area="Identity" asp-page="/Account/Manage/Index"
+                                class="nav-link text-dark">
+                                    Hello @User?.Identity.Name!
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a asp-area="Identity" asp-page="/Account/Logout"
+                                class="nav-link text-dark">
+                                    Logout
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a asp-area="Identity" asp-page="/Account/Register"
+                                class="nav-link text-dark">
+                                    Register
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a asp-area="Identity" asp-page="/Account/Login"
+                                class="nav-link text-dark">
+                                    Login
+                                </a>
+                            </li>
+                        }
+                    </div>
+
                     <div class="cleanslate w24tz-current-time w24tz-middle" style="display: inline-block !important; visibility: hidden !important; min-width:100px
                         !important; min-height:100px !important;">
                         <p><a href="//24timezones.com/current_time/canada_barrie_clock.php"

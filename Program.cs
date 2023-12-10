@@ -1,4 +1,4 @@
-
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MyFirstApp.Models;
 
@@ -20,6 +20,12 @@ builder.Services.AddSession(options => {
     options.Cookie.IsEssential = true; 
 });
 
+builder.Services.AddDefaultIdentity<IdentityUser>()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddTransient<DbInitializer>();
+
 var app = builder.Build();
 
 // Turn On Sessions
@@ -38,6 +44,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -62,5 +69,14 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapRazorPages();
+
+var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+using var scope = scopeFactory.CreateScope();
+// var initializer = scope.ServiceProvider.GetRequiredService<DbInitializer>();
+await DbInitializer.Initialize(
+    scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>(),
+    scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>()
+);
 
 app.Run();

@@ -48,3 +48,21 @@ button.accept-policy {
   text-align: center;
   font-size: 1.25em;
 }
+
+.navbar .nav-link {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 10px;
+}
+
+.auth-links {
+  display: inline-block;
+  align-items: center;
+  max-width: 500px; /* Adjust as needed */
+}
+
+.navbar-expand-sm .navbar-nav .nav-link {
+  padding-right: .5rem !important;
+  padding-left: .2rem !important;
+}
