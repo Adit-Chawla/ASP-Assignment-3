@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using MyFirstApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,12 @@ builder.Services.AddDefaultIdentity<IdentityUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddTransient<DbInitializer>();
+
+builder.Services.AddAuthentication().AddGoogle(options => {
+    options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+    options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+});
+    
 
 var app = builder.Build();
 
