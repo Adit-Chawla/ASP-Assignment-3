@@ -1,23 +1,24 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
+using MyFirstApp.Services;
+
 
 namespace MyFirstApp.Models
 {
     public class CartsController : Controller
     {
-        private readonly string _cartSessionKey;
         private readonly ApplicationDbContext _context;
+        private readonly CartService _cartService;
 
-        public CartsController(ApplicationDbContext context)
+        public CartsController(CartService cartService, ApplicationDbContext context)
         {
-            _cartSessionKey = "Cart";
             _context = context;
+            _cartService = cartService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var cart = GetCart();
+            var cart = _cartService.GetCart();
             cart ??= new Cart();
 
             if(cart == null){
@@ -45,7 +46,7 @@ namespace MyFirstApp.Models
         [HttpPost]
         public async Task<IActionResult> AddToCart(int serviceId, int quantity)
         {
-            var cart = GetCart();
+            var cart = _cartService.GetCart();
 
             if(cart==null){
                 return NotFound();
@@ -70,21 +71,30 @@ namespace MyFirstApp.Models
                 cart.CartItems.Add(cartItem);
             }
 
-            SaveCart(cart);
+            _cartService.SaveCart(cart);
 
             return RedirectToAction("Index");
         }
 
-        private Cart? GetCart()
+        [HttpPost]
+        public IActionResult RemoveFromCart(int serviceId)
         {
-            var cartJson = HttpContext.Session.GetString(_cartSessionKey);
-            return cartJson == null ? new Cart() : JsonConvert.DeserializeObject<Cart>(cartJson);
-        }
+            var cart = _cartService.GetCart();
 
-        private void SaveCart(Cart cart)
-        {
-            var cartJson = JsonConvert.SerializeObject(cart);
-            HttpContext.Session.SetString(_cartSessionKey, cartJson);
+            if(cart == null)
+            {
+                return NotFound();
+            }
+
+            var cartItem = cart.CartItems.Find(cartItem => cartItem.ServiceId == serviceId);
+
+            if(cartItem!=null)
+            {
+                cart.CartItems.Remove(cartItem);
+                _cartService.SaveCart(cart);
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

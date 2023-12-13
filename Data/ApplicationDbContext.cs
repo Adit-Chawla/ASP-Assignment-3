@@ -14,5 +14,7 @@ namespace MyFirstApp.Models
         // DbSet properties for your entities
         public DbSet<Department> Departments { get; set; }
         public DbSet<Service> Services { get; set; }
+        public DbSet<Order> Orders { get; set; } 
+        public DbSet<OrderItem> OrderItems { get; set; }
     }
 }
