@@ -244,7 +244,7 @@ namespace MyFirstApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<bool>("PaymentRecieved")
+                    b.Property<bool>("PaymentReceived")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<decimal>("Total")
@@ -275,6 +275,10 @@ namespace MyFirstApp.Migrations
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
+
+                    b.Property<string>("ServiceName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 

@@ -11,8 +11,8 @@ using MyFirstApp.Models;
 namespace MyFirstApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231209013723_CreateIdentitySchema")]
-    partial class CreateIdentitySchema
+    [Migration("20231216043328_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,6 +241,55 @@ namespace MyFirstApp.Migrations
                     b.ToTable("Departments");
                 });
 
+            modelBuilder.Entity("MyFirstApp.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("PaymentReceived")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("MyFirstApp.Models.OrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ServiceName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderItems");
+                });
+
             modelBuilder.Entity("MyFirstApp.Models.Service", b =>
                 {
                     b.Property<int>("Id")
@@ -324,6 +373,28 @@ namespace MyFirstApp.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MyFirstApp.Models.Order", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MyFirstApp.Models.OrderItem", b =>
+                {
+                    b.HasOne("MyFirstApp.Models.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("MyFirstApp.Models.Service", b =>
                 {
                     b.HasOne("MyFirstApp.Models.Department", "Department")
@@ -338,6 +409,11 @@ namespace MyFirstApp.Migrations
             modelBuilder.Entity("MyFirstApp.Models.Department", b =>
                 {
                     b.Navigation("Services");
+                });
+
+            modelBuilder.Entity("MyFirstApp.Models.Order", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 #pragma warning restore 612, 618
         }

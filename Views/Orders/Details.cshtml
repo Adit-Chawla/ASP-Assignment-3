@@ -17,11 +17,11 @@
         </dd>
 
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PaymentRecieved)
+            @Html.DisplayNameFor(model => model.PaymentReceived)
         </dt>
 
         <dd class="col-sm-10">
-            @(Model.PaymentRecieved ? "Yes" : "No")
+            @(Model.PaymentReceived ? "Yes" : "No")
         </dd>
     </dl>
 
@@ -61,4 +61,14 @@
                 </tfoot>
             </table>
         }
+</div>
+
+<div>
+    @if(!Model.PaymentReceived)
+    {
+        <form asp-action="ProcessPayment">
+            <button class="btn btn-success">Proceed To Payment</button>
+        </form>
+    }
+    <a asp-action="Index">Back To List</a>
 </div>

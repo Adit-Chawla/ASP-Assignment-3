@@ -33,7 +33,9 @@ builder.Services.AddAuthentication().AddGoogle(options => {
     options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
 });
 
-builder.Services.AddScoped<CartService>();    
+builder.Services.AddScoped<CartService>();
+
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
 var app = builder.Build();
 

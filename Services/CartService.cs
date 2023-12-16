@@ -24,5 +24,11 @@ namespace MyFirstApp.Services
             var cartJson = JsonConvert.SerializeObject(cart);
             _httpContextAccessor.HttpContext.Session.SetString(_cartSessionKey, cartJson);
         }
+
+        public void DestroyCart()
+        {
+            _httpContextAccessor.HttpContext.Session.Remove(_cartSessionKey);
+
+        }
     }
 }

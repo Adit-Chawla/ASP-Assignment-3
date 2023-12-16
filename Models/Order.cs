@@ -16,9 +16,9 @@ namespace MyFirstApp.Models
         public decimal Total{ get; set; } = 0.00M;
 
         [Required]
-        public bool PaymentRecieved { get; set;} = false;
+        public bool PaymentReceived { get; set;} = false;
 
-        public IdentityUser User { get; set; } = new IdentityUser();
+        public IdentityUser? User { get; set; }
 
         public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     }
